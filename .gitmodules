@@ -1,0 +1,6 @@
+[submodule "pg_tileserv"]
+	path = pg_tileserv
+	url = https://github.com/OMP-IRD/pg_tileserv.git
+[submodule "hyfaa-scheduler"]
+	path = hyfaa-scheduler
+	url = https://github.com/OMP-IRD/hyfaa-scheduler.git

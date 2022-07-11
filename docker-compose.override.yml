@@ -1,0 +1,30 @@
+version: "3.7"
+# Development overrides
+
+services:
+  database:
+    ports:
+      - "5433:5432"
+
+  backend:
+#    command: ["sleep","10000"]
+    ports:
+      - "8000:8000"
+    volumes:
+#      - django_static_files:/static
+      - ./sagui_backend/sample_data:/sample_data
+
+  pg-tileserv:
+    ports:
+      - "7800:7800"
+
+#  frontend:
+#    ports:
+#      - "81:80"
+
+  varnish:
+    ports:
+      - "80:80"
+
+networks:
+  internal:

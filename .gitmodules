@@ -4,3 +4,6 @@
 [submodule "hyfaa-scheduler"]
 	path = hyfaa-scheduler
 	url = https://github.com/OMP-IRD/hyfaa-scheduler.git
+[submodule "sagui_backend"]
+	path = sagui_backend
+	url = https://github.com/HydroMetGuyane-Hydro-Matters/sagui_backend.git

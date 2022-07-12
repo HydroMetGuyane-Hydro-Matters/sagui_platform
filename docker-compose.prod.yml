@@ -25,7 +25,7 @@ services:
       - HYDROWEB_USER_FILE=/run/secrets/hydroweb_user
       - HYDROWEB_PASSWORD_FILE=/run/secrets/hydroweb_password
     volumes:
-      - ./hyfaa-scheduler/work_configurations/operational_niger_gsmap:/work
+      - ./hyfaa-scheduler/work_configurations/operational_guyane_gsmap:/work
     networks:
       - internal
 

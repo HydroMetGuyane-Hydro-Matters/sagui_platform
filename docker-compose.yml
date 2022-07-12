@@ -47,7 +47,7 @@ services:
       - POSTGRES_HOST=database
       - POSTGRES_PORT=5432
     volumes:
-      - /home/jean/fast/dev/IRD/hyfaa-mgb-platform/hyfaa-scheduler/work_configurations/operational_guyane_gsmap:/hyfaa-scheduler/data
+      - ./hyfaa-scheduler/work_configurations/operational_guyane_gsmap:/hyfaa-scheduler/data
 #      - django_static_files:/static
     secrets:
       - django_env

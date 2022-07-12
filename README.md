@@ -26,19 +26,20 @@ It starts the hyfaa scheduler on startup, so you first need to configure it
 
 To start them in production mode, the docker-compose.prod.yml applies a few modifications. Mostly, it is assuming that you have a [traefik reverse proxy](https://github.com/OMP-IRD/traefik-proxy) already running on the server and will configure the services to be exposed through this proxy.
 ```bash
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+USER_ID="$(id -u)" GROUP_ID="$(id -g)" docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
+The reasons why you should use those environment variables is explained just below in the section dedicated to the hyfaa scheduler. Of course, you can also set them once and for all in your profiles.rc file.
 
 
 ### Running the hyfaa scheduler
 The hyfaa scheduler is the application that produces the data. If you used the `-f docker-compose.prod.yml` option, it should run when you first `up` the compo. Later runs are to be scheduled, for instance using a cron task. You can run the following command to execute the hyfaa scheduler:
 ```bash
-USER_ID="$(id -u)" GROUP_ID="$(id -g)"; docker-compose -f docker-compose.yml -f docker-compose-production.yml restart scheduler
+USER_ID="$(id -u)" GROUP_ID="$(id -g)" docker-compose -f docker-compose.yml -f docker-compose.prod.yml restart scheduler
 ```
 The variables allow to run the scheduler as the current user. Otherwise, the generated files will be owned by root, which can result unpractical.
 The first scheduler run can take a long time, since it start from far back in time. Next runs are reasonably short.
 
-There is no built-in CRON task to re-run the HYFAA scheduler. You'll have to run it manually (`docker-compose -f docker-compose.yml -f docker-compose-production.yml start scheduler`) or program yourself a CRON task on your machine, running the same command.
+There is no built-in CRON task to re-run the HYFAA scheduler. You'll have to run it manually (`docker-compose -f docker-compose.yml -f docker-compose.prod.yml start scheduler`) or program yourself a CRON task on your machine, running the same command.
 
 #### Run the scheduler as current user
 The scheduler is writing data in work_configurations. By default, it runs as
@@ -50,7 +51,7 @@ The scheduler is writing data in work_configurations. By default, it runs as
   * either before running the docker-compose command. For instance:
 
 ```bash
-USER_ID="$(id -u)" GROUP_ID="$(id -g)"; docker-compose ...
+USER_ID="$(id -u)" GROUP_ID="$(id -g)" docker-compose ...
 ```
 
 _**Note:**_ In a CRON task, env. vars defined in your .bashrc file are not

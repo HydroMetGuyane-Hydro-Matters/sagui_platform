@@ -106,6 +106,10 @@ docker-compose -f docker-compose.yml  -f docker-compose.prod.yml exec backend ba
 ```
 It might take some time the first time, since there should be a few years of data to import. The later runs are incremental, unless you force to overwrite the records with the `-f` option.
 
+## CRON
+To update the data using a cron task, a convenience script is provided: update_data.sh.
+In your cron job, declare it with full path.
+
 ## HTTPS
 A varnish instance is put in front to gather all behind the :80 port. But it does not handle https configuration. 
 For this, you are expected to use an externally traefik instance, like https://github.com/OMP-IRD/traefik-proxy.

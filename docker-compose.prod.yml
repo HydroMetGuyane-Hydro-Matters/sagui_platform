@@ -37,14 +37,6 @@ services:
 #    networks:
 #      - internal
 #      - traefik-proxy_proxy_network
-#    labels:
-#      - "traefik.enable=true"
-#      - "traefik.docker.network=traefik-proxy_proxy_network"
-#      - "traefik.http.routers.django.tls=true"
-#      - "traefik.http.routers.django.entrypoints=websecure"
-#      - "traefik.http.routers.django.rule=( Host(`localhost`) || Host(`raincell.pigeo.fr`) ) && PathPrefix(`/api`)"
-#      - "traefik.http.routers.django.tls.certresolver=letsEncrypt"
-#      - "traefik.http.routers.django.tls.domains[0].main=raincell.pigeo.fr"
 
   pg-tileserv:
 #    networks:
@@ -52,14 +44,6 @@ services:
 #      - traefik-proxy_proxy_network
     env_file:
       - secrets-prod/pg_tileserv.env
-#    labels:
-#      - "traefik.enable=true"
-#      - "traefik.docker.network=traefik-proxy_proxy_network"
-#      - "traefik.http.routers.pg-tileserv.tls=true"
-#      - "traefik.http.routers.pg-tileserv.entrypoints=websecure"
-#      - "traefik.http.routers.pg-tileserv.rule=( Host(`localhost`) || Host(`raincell.pigeo.fr`) ) && PathPrefix(`/tiles`)"
-#      - "traefik.http.routers.pg-tileserv.tls.certresolver=letsEncrypt"
-#      - "traefik.http.routers.pg-tileserv.tls.domains[0].main=raincell.pigeo.fr"
 
   varnish:
     networks:
@@ -70,9 +54,9 @@ services:
       - "traefik.docker.network=traefik-proxy_proxy_network"
       - "traefik.http.routers.varnish.tls=true"
       - "traefik.http.routers.varnish.entrypoints=websecure"
-      - "traefik.http.routers.varnish.rule=Host(`localhost`) || Host(`sagui.pigeosolution.fr`)"
+      - "traefik.http.routers.varnish.rule=Host(`localhost`) || Host(`sagui.hydro-matters.fr`)"
       - "traefik.http.routers.varnish.tls.certresolver=letsEncrypt"
-      - "traefik.http.routers.varnish.tls.domains[0].main=sagui.pigeosolution.fr"
+      - "traefik.http.routers.varnish.tls.domains[0].main=sagui.hydro-matters.fr"
 
 
 networks:

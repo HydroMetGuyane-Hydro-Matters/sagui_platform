@@ -87,14 +87,14 @@ You might need to adapt a few elements to match your configuration (notably PGPA
 Those data are pre-global warming reference files, covering the stations. 
 They can be imported by running
 ```bash
-docker-compose -f docker-compose.yml exec backend bash -c "./manage.py stations_import_reference_data -p /data/stations/data_ref_2010-2020.csv"
+docker-compose -f docker-compose.yml  -f docker-compose.prod.yml exec backend bash -c "./manage.py stations_import_reference_data -p /data/stations/data_ref_2010-2020.csv"
 ```
 
 #### Importing hyfaa netcdf data (dynamic data: import regularly to keep updated)
 Hyfaa netcdf data are generated each time the hyfaa scheduler is run (ideally daily). To import the new data, you should run
 
 ```bash
-docker-compose -f docker-compose.yml exec backend bash -c "./manage.py hyfaa_import"
+docker-compose -f docker-compose.yml  -f docker-compose.prod.yml exec backend bash -c "./manage.py hyfaa_import"
 ```
 It might take some time the first time, since there should be a few years of data to import. The later runs are incremental, unless you force to overwrite the records with the `-f` option.
 
@@ -102,7 +102,7 @@ It might take some time the first time, since there should be a few years of dat
 Rainfall netcdf data are generated each time the hyfaa scheduler is run (ideally daily). To import the new data, you should run
 
 ```bash
-docker-compose -f docker-compose.yml exec backend bash -c "./manage.py rainfall_import"
+docker-compose -f docker-compose.yml  -f docker-compose.prod.yml exec backend bash -c "./manage.py rainfall_import"
 ```
 It might take some time the first time, since there should be a few years of data to import. The later runs are incremental, unless you force to overwrite the records with the `-f` option.
 

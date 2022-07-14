@@ -8,7 +8,7 @@ export GROUP_ID="$(id -g)"
 cd "$(dirname "$0")";
 
 echo "Run scheduler"
-#docker-compose -f docker-compose.yml -f docker-compose.prod.yml restart scheduler
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml restart scheduler
 echo "Import scheduler data into DB"
 docker-compose -f docker-compose.yml  -f docker-compose.prod.yml exec backend bash -c "./manage.py hyfaa_import"
 echo "Import rain data into DB"

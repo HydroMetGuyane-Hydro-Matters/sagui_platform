@@ -13,9 +13,13 @@ secrets:
     file: secrets-prod/django_superuser_password.txt
 
 services:
+  # start the scheduler as a ghost container (does nothing). It will make it easier to
+  # call from a cron task (using exec, we have the whole process running in the console
+  # as opposed to start which was restarting the task in the background
   scheduler:
     restart: "no"
     image: pigeosolutions/hyfaa-scheduler:4.3
+    command: ["tail", "-f", "/dev/null"]
     user: $USER_ID:$GROUP_ID
     build: ./hyfaa-scheduler
     secrets:

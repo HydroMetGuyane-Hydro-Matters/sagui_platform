@@ -8,10 +8,13 @@ export GROUP_ID="$(id -g)"
 cd "$(dirname "$0")";
 
 echo "Run scheduler"
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml restart scheduler
+# start doesn't work, since restart command returns immediately (doesn't wait for the end of the run process)
+# so we change the pattern: scheduler runs as 'ghost' container that we cn exec when needed.
+# exec'ing happens in the terminal
+/usr/local/bin/docker-compose -f docker-compose.yml -f docker-compose.prod.yml exec scheduler bash run.sh
 echo "Import scheduler data into DB"
-docker-compose -f docker-compose.yml  -f docker-compose.prod.yml exec backend bash -c "./manage.py hyfaa_import"
+/usr/local/bin/docker-compose -f docker-compose.yml  -f docker-compose.prod.yml exec backend bash -c "./manage.py hyfaa_import"
 echo "Import rain data into DB"
-docker-compose -f docker-compose.yml  -f docker-compose.prod.yml exec backend bash -c "./manage.py rainfall_import"
+/usr/local/bin/docker-compose -f docker-compose.yml  -f docker-compose.prod.yml exec backend bash -c "./manage.py rainfall_import"
 echo "last updated"
 echo $(date)

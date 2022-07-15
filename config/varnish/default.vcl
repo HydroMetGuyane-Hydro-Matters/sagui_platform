@@ -47,7 +47,7 @@ sub vcl_recv {
     unset req.http.cookie;
     set req.backend_hint = tileserv;
    }
-   if (req.url ~ "^/api/") {
+   if (req.url ~ "^/api/" || req.url ~ "^/static/") {
     unset req.http.cookie;
     set req.backend_hint = api;
    }

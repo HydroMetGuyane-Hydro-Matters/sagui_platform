@@ -1,6 +1,8 @@
 # SAGUI: Sig d’Alerte pour la Guyane sur l’eaU et l’aIr
 This is the parent repo of the SAGUI demonstration portal.
 
+[Technical documentation (in french)](https://hydrometguyane-hydro-matters.github.io/sagui_platform/)
+
 ## Build
 You should be able to build the needed applications using docker-compose:
 ```bash

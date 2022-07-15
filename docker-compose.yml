@@ -2,7 +2,7 @@ version: "3.7"
 
 volumes:
   postgresql_data:
-#  django_static_files:
+  django_static_files:
 
 secrets:
   pg_postgres_password:
@@ -34,7 +34,7 @@ services:
     build: ./sagui_backend
     depends_on:
       - database
-#    command: ["sleep","10000"]
+    command: ["gunicorn", "--bind", "0.0.0.0:8000", "--log-level", "debug", "sagui_backend.wsgi:application"]
 #    ports:
 #      - 8000:8000
     expose:
@@ -48,10 +48,22 @@ services:
       - POSTGRES_PORT=5432
     volumes:
       - ./hyfaa-scheduler/work_configurations/operational_guyane_gsmap:/hyfaa-scheduler/data
-#      - django_static_files:/static
+      - django_static_files:/static
     secrets:
       - django_env
       - django_superuser_password
+    networks:
+      - internal
+
+  # serve django static files (gunicorn won't serve static files, not recommended)
+  nginx:
+    image: nginx:alpine
+    depends_on:
+      - backend
+    volumes:
+      - django_static_files:/usr/share/nginx/html/backend_static
+#      - ./nginx/templates:/etc/nginx/templates
+    restart: always
     networks:
       - internal
 

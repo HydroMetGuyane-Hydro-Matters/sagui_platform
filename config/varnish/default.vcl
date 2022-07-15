@@ -10,6 +10,11 @@ backend api {
     .port = "8000";
 }
 
+backend nginx {
+    .host = "nginx";
+    .port = "80";
+}
+
 #backend frontend {
 #    .host = "frontend";
 #    .port = "80";
@@ -47,7 +52,10 @@ sub vcl_recv {
     unset req.http.cookie;
     set req.backend_hint = tileserv;
    }
-   if (req.url ~ "^/api/" || req.url ~ "^/static/") {
+   if (req.url ~ "^/backend_static/") {
+    set req.backend_hint = nginx;
+   }
+   if (req.url ~ "^/api/") {
     unset req.http.cookie;
     set req.backend_hint = api;
    }

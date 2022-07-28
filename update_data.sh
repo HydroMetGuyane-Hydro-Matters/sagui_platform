@@ -9,7 +9,10 @@ cd "$(dirname "$0")";
 ORANGE=$(tput setaf 3)
 NORMAL=$(tput sgr0) # taken from https://stackoverflow.com/questions/4332478/read-the-current-text-color-in-a-xterm/4332530#4332530
 
-echo $(date)
+echo $(date +'%d-%m-%Y_%H:%M')
+
+# disable tty mode in docker-compose
+export COMPOSE_INTERACTIVE_NO_CLI=1
 
 printf "${ORANGE}\n\n-------------------------------------------------\n"
 printf "Run scheduler\n${NORMAL}"
@@ -28,4 +31,4 @@ printf "Import rain data into DB\n${NORMAL}"
 
 printf "${ORANGE}\n\n-------------------------------------------------\n"
 printf "last updated: \n${NORMAL}"
-printf $(date)
+printf $(date +'%d-%m-%Y_%H:%M')

@@ -55,7 +55,7 @@ sub vcl_recv {
    if (req.url ~ "^/backend_static/") {
     set req.backend_hint = nginx;
    }
-   if (req.url ~ "^/api/") {
+   if (req.url ~ "^/api/" || req.url ~ "^/admin/") {
     unset req.http.cookie;
     set req.backend_hint = api;
    }

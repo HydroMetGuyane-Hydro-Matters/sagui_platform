@@ -29,7 +29,7 @@ docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
 - Configure le service varnish un fonctionnement en production : 
   - configure son accès à un réseau qui doit être pré-existant et nommé `traefik-proxy_proxy_network`
   - ajoute les variables d'environnement traefik pour une résolution et une termination SSL via traefik.
-  - un service traefik doit déjà être en fonctionnement sur le serveur. La configuration présente correspond à une config avec https://github.com/OMP-IRD/traefik-proxy
+  - un service traefik doit déjà être en fonctionnement sur le serveur. La configuration présente correspond à une config avec [https://github.com/OMP-IRD/traefik-proxy](https://github.com/OMP-IRD/traefik-proxy)
 - Utilise des secrets pour toutes les données sensibles (mots de passe)
 
 Se lance avec : 

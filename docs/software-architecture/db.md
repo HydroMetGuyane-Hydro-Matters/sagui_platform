@@ -1,17 +1,8 @@
-## Architecture logicielle
-
-Sur le plan logiciel, la plate-forme se compose des éléments suivants : 
-- frontend javascript. Définit l'interface utilisateur. Consomme les services fournis par l'API et les services carto (Vector Tiles)
-- backend constitué de 
-  - API de données codé en python (framework django)
-  - seveur de MVT (vector tiles)
-  - base de données PostGIS
-
-### Base de données PostGIS
+# Base de données PostGIS
 La base de données PostGIS stocke l'intégralité des données de l'application. 
 C'est aussi elle qui fournit une grosse partie de la logique de l'application. En effet, une base de donnée n'est pas qu'un outil de stockage. On peut aussi y définir des vues et fonctions. Bien utilisée, elle permet d'effectuer un grand nombre de transformations et traitements, au plus près de la donnée.
 
-#### Tables de données
+## Tables de données
 En dehors des tables gérées de façon standard par Django, la base contient les tables suivantes : 
 
 | table                    | définition                                                                                                                                                                                                                                                                                                                                                                         |
@@ -27,7 +18,7 @@ En dehors des tables gérées de façon standard par Django, la base contient le
 | hyfaa_data_mgbstandard   | Contient les données hyfaa mgbstandard. Un enregistrement par couple (cell_id, date). Les champs flow_expected et flow_anomaly sont calculés à chaque nouvelle insertion via le trigger publication_post_processing                                                                                                                                                      |
 | hyfaa_data_forecast      | Contient les données hyfaa forecast. Un enregistrement par couple (cell_id, date). Les champs flow_expected et flow_anomaly sont calculés à chaque nouvelle insertion via le trigger publication_post_processing                                                                                                                                                         |
 
-#### Vues et vues matérialisées
+## Vues et vues matérialisées
 
 A partir de ces données sont générées les vues listées dans le tableau suivant. Les vues simples sont juste des requêtes stockées en mémoire, simplifiant leur accès, mais nécessitant tout de même de rejouer la requête à chaque fois. Les vues matérialisées sont un hybride entre table et vue : elles sont définies comme des vues (calculés à partir d'une requête sur des tables/vues existantes) mais stockées en BD, donc à accès rapide et optimisé. Pour les actualiser, il faut lancer explicitement une commande REFRESH. C'est ce que fait le trigger publication_post_processing qui lance un REFRESH à chaque mise à jour de la table sagui_importstate
 
@@ -56,7 +47,7 @@ A partir de ces données sont générées les vues listées dans le tableau suiv
 | stations_with_flow_alerts                     | vue  | Stations (donnée géo) aggrégée avec l'information de niveau d'alerte de débit sur les 15 derniers jours, aggrégée en objet json                                                                                                                                                                                                             |
 | stations_with_flow_previ                      | vue  | Stations (donnée géo) aggrégée avec l'information de niveau de prévi de débit sur les 15 derniers jours, aggrégée en objet json                                                                                                                                                                                                             |
 
-#### Fonctions
+## Fonctions
 Outre les fonctions définies nativement par PostGIS et PostgreSQL, plusieurs fonctions sont définie pour ce projet : 
 
 

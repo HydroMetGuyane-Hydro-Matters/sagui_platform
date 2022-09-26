@@ -18,9 +18,9 @@ services:
     ports:
       - "7800:7800"
 
-#  frontend:
-#    ports:
-#      - "81:80"
+ frontend:
+   ports:
+     - "81:80"
 
   varnish:
     ports:

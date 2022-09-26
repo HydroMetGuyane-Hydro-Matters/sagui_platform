@@ -28,6 +28,14 @@ services:
     networks:
       - internal
 
+  frontend:
+    image: pigeosolutions/sagui-ui:latest
+    restart: always
+    expose:
+      - 80
+    networks:
+      - internal
+
   backend:
     image: pigeosolutions/sagui_backend:latest
     restart: always
@@ -121,7 +129,7 @@ services:
     depends_on:
       - pg-tileserv
       - backend
-#      - frontend
+     - frontend
     networks:
       - internal
 

@@ -15,10 +15,10 @@ backend nginx {
     .port = "80";
 }
 
-#backend frontend {
-#    .host = "frontend";
-#    .port = "80";
-#}
+backend frontend {
+    .host = "frontend";
+    .port = "80";
+}
 
 
 sub vcl_deliver {
@@ -44,10 +44,10 @@ sub vcl_backend_response {
 }
 
 sub vcl_recv {
-#   if (req.url ~ "^/raincell-public") {
-#    #unset req.http.cookie;
-#    set req.backend_hint = frontend;
-#   }
+   if (req.url ~ "^/sagui") {
+    #unset req.http.cookie;
+    set req.backend_hint = frontend;
+   }
    if (req.url ~ "^/tiles/") {
     unset req.http.cookie;
     set req.backend_hint = tileserv;

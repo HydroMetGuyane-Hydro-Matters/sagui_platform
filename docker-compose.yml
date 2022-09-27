@@ -129,7 +129,7 @@ services:
     depends_on:
       - pg-tileserv
       - backend
-     - frontend
+      - frontend
     networks:
       - internal
 

@@ -50,12 +50,13 @@ services:
     environment:
       - DJANGO_ENV_FILE=/run/secrets/django_env
       - DJANGO_SUPERUSER_PASSWORD_FILE=/run/secrets/django_superuser_password
-      - STATIC_ROOT=/static/
       # Needed by wait-for-db:
       - POSTGRES_HOST=database
       - POSTGRES_PORT=5432
+      - SAGUI_PATH_TO_ATMO_FILES=/atmo_s5p/data/styled
     volumes:
       - ./hyfaa-scheduler/work_configurations/operational_guyane_gsmap:/hyfaa-scheduler/data
+      - ./atmo_s5p/data:/atmo_s5p/data
       - django_static_files:/static
     secrets:
       - django_env
@@ -70,6 +71,7 @@ services:
       - backend
     volumes:
       - django_static_files:/usr/share/nginx/html/backend_static
+      - ./atmo_s5p/data:/usr/share/nginx/html/backend_static/atmo
 #      - ./nginx/templates:/etc/nginx/templates
     restart: always
     networks:
@@ -130,6 +132,21 @@ services:
       - pg-tileserv
       - backend
       - frontend
+    networks:
+      - internal
+
+  # Used for cron scripting: regular retrieval and processing of atmo data
+  # start the scheduler as a ghost container (does nothing). It will make it easier to
+  # call from a cron task (using exec, we have the whole process running in the console
+  # as opposed to start which was restarting the task in the background
+  atmo:
+    image: pigeosolutions/sagui_atmo:latest
+    build: atmo_s5p
+    command: ["tail", "-f", "/dev/null"]
+    user: $USER_ID:$GROUP_ID
+    volumes:
+      - ./atmo_s5p/data:/mnt/data
+    restart: "no"
     networks:
       - internal
 

@@ -7,3 +7,6 @@
 [submodule "sagui_backend"]
 	path = sagui_backend
 	url = https://github.com/HydroMetGuyane-Hydro-Matters/sagui_backend.git
+[submodule "atmo_s5p"]
+	path = atmo_s5p
+	url = https://github.com/HydroMetGuyane-Hydro-Matters/atmo_s5p.git

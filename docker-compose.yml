@@ -58,6 +58,7 @@ services:
       - POSTGRES_HOST=database
       - POSTGRES_PORT=5432
       - SAGUI_PATH_TO_ATMO_FILES=/atmo_s5p/data/styled
+      - SAGUI_DATA_PATH=/data
     volumes:
       - ./hyfaa-scheduler/work_configurations/operational_guyane_gsmap:/hyfaa-scheduler/data
       - ./atmo_s5p/data:/atmo_s5p/data

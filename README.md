@@ -13,7 +13,7 @@ docker-compose build
 ### Dev mode (localhost)
 To start them in development mode, you can simply run
 ```bash
-docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
+USER_ID="$(id -u)" GROUP_ID="$(id -g)" docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
 ```
 Both `docker-compose.yml` and `docker-compose.override.yml` will be applied. Each service will open a port (5433, 8000, 7800). A varnish instance is put in front and should act as reverse-proxy, exposing them on port 80.
 The available services are
@@ -34,14 +34,14 @@ The reasons why you should use those environment variables is explained just bel
 
 
 ### Running the hyfaa scheduler
-The hyfaa scheduler is the application that produces the data. If you used the `-f docker-compose.prod.yml` option, it should run when you first `up` the compo. Later runs are to be scheduled, for instance using a cron task. You can run the following command to execute the hyfaa scheduler:
+The hyfaa scheduler is the application that produces the data. It is configured in the docker-compose.yml to run as a 'ghost' container (sleeps and does nothing but staying available). Runs are to be scheduled, for instance using a cron task or run manually. You can run the following command to execute the hyfaa scheduler:
 ```bash
-USER_ID="$(id -u)" GROUP_ID="$(id -g)" docker-compose -f docker-compose.yml -f docker-compose.prod.yml restart scheduler
+USER_ID="$(id -u)" GROUP_ID="$(id -g)" docker-compose exec -T scheduler bash run.sh
 ```
 The variables allow to run the scheduler as the current user. Otherwise, the generated files will be owned by root, which can result unpractical.
 The first scheduler run can take a long time, since it start from far back in time. Next runs are reasonably short.
 
-There is no built-in CRON task to re-run the HYFAA scheduler. You'll have to run it manually (`docker-compose -f docker-compose.yml -f docker-compose.prod.yml start scheduler`) or program yourself a CRON task on your machine, running the same command.
+There is no built-in CRON task to re-run the HYFAA scheduler. You'll have to run it manually (`docker-compose exec -T scheduler bash run.sh`) or program yourself a CRON task on your machine, running the same command.
 
 #### Run the scheduler as current user
 The scheduler is writing data in work_configurations. By default, it runs as

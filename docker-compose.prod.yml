@@ -16,22 +16,22 @@ services:
   # start the scheduler as a ghost container (does nothing). It will make it easier to
   # call from a cron task (using exec, we have the whole process running in the console
   # as opposed to start which was restarting the task in the background
-  scheduler:
-    restart: "no"
-    image: pigeosolutions/hyfaa-scheduler:4.3
-    command: ["tail", "-f", "/dev/null"]
-    user: $USER_ID:$GROUP_ID
-    build: ./hyfaa-scheduler
-    secrets:
-      - hydroweb_user
-      - hydroweb_password
-    environment:
-      - HYDROWEB_USER_FILE=/run/secrets/hydroweb_user
-      - HYDROWEB_PASSWORD_FILE=/run/secrets/hydroweb_password
-    volumes:
-      - ./hyfaa-scheduler/work_configurations/operational_guyane_gsmap:/work
-    networks:
-      - internal
+#  scheduler:
+#    restart: "no"
+#    image: pigeosolutions/hyfaa-scheduler:4.3
+#    command: ["tail", "-f", "/dev/null"]
+#    user: $USER_ID:$GROUP_ID
+#    build: ./hyfaa-scheduler
+#    secrets:
+#      - hydroweb_user
+#      - hydroweb_password
+#    environment:
+#      - HYDROWEB_USER_FILE=/run/secrets/hydroweb_user
+#      - HYDROWEB_PASSWORD_FILE=/run/secrets/hydroweb_password
+#    volumes:
+#      - ./hyfaa-scheduler/work_configurations/operational_guyane_gsmap:/work
+#    networks:
+#      - internal
 
 #  backend:
 #    volumes:

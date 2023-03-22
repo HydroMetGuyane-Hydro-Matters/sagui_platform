@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr" >
+<head>
+    <meta charset="utf-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAGUI</title>
+    <link href="/backend_static/sagui/css/style.css" rel="stylesheet"><style>
+
+      section {
+          margin-top: 10em;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+      .btn {
+        display: inline-block;
+        font-weight: 400;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        border: 1px solid transparent;
+          border-top-color: transparent;
+          border-right-color: transparent;
+          border-bottom-color: transparent;
+          border-left-color: transparent;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: .25rem;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+      }
+      .btn-map {
+        color: #fff;
+        background-color: rgb(0, 173, 82);
+        border-color: rgb(0, 173, 82);
+      }
+      .btn-graph {
+        color: #fff;
+        background-color: rgb(255, 128, 13);
+        border-color: rgb(255, 128, 13);
+      }
+      .btn-big {
+          font-weight: bold;
+          padding: 50px 100px;
+      }
+    </style>
+</head>
+<body>
+        <header>
+                <nav class="navbar">
+                        <div><a><img src="/backend_static/sagui/logo.png" alt="" width="50" height="50"></a></div>
+                        <div><div  class="title">SAGUI: Hydrogeologic Space Monitoring of French Guyana for the society</div></div>
+                        <div class="small"><a href="https://www.spaceclimateobservatory.org/fr/ophyse" target="_blank" translate="" class="small help">Find out more</a></div>
+                </nav>
+        </header>
+
+        <section>
+
+          <a href="/sagui/" class="btn btn-big btn-map" role="button">Carte</a>
+          <a href="/dashboards/" class="btn btn-big btn-graph" role="button">Graphiques</a>
+        </section>
+
+        <footer>
+        </footer>
+</body>
+</html>

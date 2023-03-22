@@ -47,19 +47,13 @@ sub vcl_recv {
    if (req.url ~ "^/sagui") {
     #unset req.http.cookie;
     set req.backend_hint = frontend;
-   }
-   if (req.url ~ "^/tiles/") {
+   } elsif (req.url ~ "^/tiles/") {
     unset req.http.cookie;
     set req.backend_hint = tileserv;
-   }
-   if (req.url ~ "^/backend_static/") {
-    set req.backend_hint = nginx;
-   }
-   if (req.url ~ "^/api/") {
+   } elsif (req.url ~ "^/api/" || req.url ~ "^/admin/" || req.url ~ "^/dashboards/") {
     unset req.http.cookie;
     set req.backend_hint = api;
-   }
-   if (req.url ~ "^/admin/") {
-    set req.backend_hint = api;
+   } else {
+    set req.backend_hint = nginx;
    }
 }

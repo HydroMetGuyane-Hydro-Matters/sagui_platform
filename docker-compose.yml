@@ -34,6 +34,7 @@ services:
 
   frontend:
     image: pigeosolutions/sagui-ui:latest
+    pull_policy: always
     restart: always
     expose:
       - 80
@@ -59,6 +60,8 @@ services:
       - POSTGRES_PORT=5432
       - SAGUI_PATH_TO_ATMO_FILES=/atmo_s5p/data/styled
       - SAGUI_DATA_PATH=/data
+      # Needed to process collectstatic:
+      - STATIC_ROOT=/static/
     volumes:
       - ./hyfaa-scheduler/work_configurations/operational_guyane_gsmap:/hyfaa-scheduler/data
       - ./atmo_s5p/data:/atmo_s5p/data
@@ -75,6 +78,7 @@ services:
     depends_on:
       - backend
     volumes:
+      - ./nginx_html:/usr/share/nginx/html/
       - django_static_files:/usr/share/nginx/html/backend_static
       - ./atmo_s5p/data:/usr/share/nginx/html/backend_static/atmo
 #      - ./nginx/templates:/etc/nginx/templates

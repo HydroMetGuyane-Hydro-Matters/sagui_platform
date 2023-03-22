@@ -80,7 +80,7 @@ services:
     volumes:
       - ./nginx_html:/usr/share/nginx/html/
       - django_static_files:/usr/share/nginx/html/backend_static
-      - ./atmo_s5p/data:/usr/share/nginx/html/backend_static/atmo
+      - ./atmo_s5p/data:/usr/share/nginx/html/atmo
 #      - ./nginx/templates:/etc/nginx/templates
     restart: always
     networks:

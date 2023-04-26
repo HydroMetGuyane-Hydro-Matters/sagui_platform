@@ -15,6 +15,8 @@ secrets:
     file: secrets-dev/hydroweb_user.txt
   hydroweb_password:
     file: secrets-dev/hydroweb_password.txt
+  smtp_env:
+    file: secrets-dev/smtp_env.txt
 
 services:
   database:
@@ -62,6 +64,8 @@ services:
       - SAGUI_DATA_PATH=/data
       # Needed to process collectstatic:
       - STATIC_ROOT=/static/
+      # email config
+      - SMTP_ENV_FILE=/run/secrets/smtp_env
     volumes:
       - ./hyfaa-scheduler/work_configurations/operational_guyane_gsmap:/hyfaa-scheduler/data
       - ./atmo_s5p/data:/atmo_s5p/data
@@ -69,6 +73,7 @@ services:
     secrets:
       - django_env
       - django_superuser_password
+      - smtp_env
     networks:
       - internal
 

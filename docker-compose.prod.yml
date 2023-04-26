@@ -11,6 +11,8 @@ secrets:
     file: secrets-prod/django_env.txt
   django_superuser_password:
     file: secrets-prod/django_superuser_password.txt
+  smtp_env:
+    file: secrets-prod/smtp_env.txt
 
 services:
   # start the scheduler as a ghost container (does nothing). It will make it easier to

@@ -2,6 +2,8 @@
 
 Ce site tente de documenter les aspects techniques liés à la réalisation du portail https://sagui.hydromatters.fr.
 
+- **Algorithmes**
+  - [**Seuils d'alerte dans la carte**](algos/alerts.md)
 - **Architecture logicielle** \
 Sur le plan logiciel, la plate-forme se compose des éléments suivants : 
   - **frontend** : Définit l'interface utilisateur. Consomme les services fournis par l'API et les services carto (Vector Tiles)\

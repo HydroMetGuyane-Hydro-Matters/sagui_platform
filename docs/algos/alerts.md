@@ -2,7 +2,7 @@
 
 Les données carto sont réparties en 4 sections : prévisions, alertes de débit, de pluie et atmosphériques. Les boutons sur la gauche de la carte permettent de basculer entre ces quatres compositions carto. Ils donnent aussi un aperçu de l'état d'alerte global (couleur, icône).
 
-Ces informations d'alerte globale sont fournies par le point d'API https://sagui.hydro-matters.fr/api/v1/dashboard
+Ces informations d'alerte globale sont fournies par le point d'API [https://sagui.hydro-matters.fr/api/v1/dashboard](https://sagui.hydro-matters.fr/api/v1/dashboard)
 
 Selon la thématique choisie, les alertes sur la carte s'affichent différemment :
 - Pour les deux premiers boutons, les alertes sont affichées pour des stations de référence. Les informations de débit sont affichées pour tous les tronçons de rivière.
@@ -14,9 +14,9 @@ Ci-dessous plus de détails sur chacun des modes d'alerte
 ## Prévisions
 
 ### Alerte globale
-Accès API : https://sagui.hydro-matters.fr/api/v1/dashboard
+Accès API : [https://sagui.hydro-matters.fr/api/v1/dashboard](https://sagui.hydro-matters.fr/api/v1/dashboard)
 
-Elles sont définies dans https://github.com/HydroMetGuyane-Hydro-Matters/sagui_backend/blob/main/src/sagui/utils/stations_forecast.py#L12-L90
+Elles sont définies dans [https://github.com/HydroMetGuyane-Hydro-Matters/sagui_backend/blob/main/src/sagui/utils/stations_forecast.py#L12-L90](https://github.com/HydroMetGuyane-Hydro-Matters/sagui_backend/blob/main/src/sagui/utils/stations_forecast.py#L12-L90)
 
 Le niveau d'alerte s'appuie sur le calcul d'anomalie. Plus précisément, il prend l'anomalie moyenne sur l'ensemble des stations. Et détermine le niveau d'alerte à partir de ça. La correspondance se fait via la fonction SQL `guyane.anomaly_to_alert_level` définie comme suit : 
 ```
@@ -58,7 +58,7 @@ Les valeurs d'anomalies
 
 ### Alerte par station
 
-Accès API : https://sagui.hydro-matters.fr/api/v1/flow_previ/stations
+Accès API : [https://sagui.hydro-matters.fr/api/v1/flow_previ/stations](https://sagui.hydro-matters.fr/api/v1/flow_previ/stations)
 
 La fonction utilisée pour le calcul d'anomalie et les alertes est la même que pour les alertes globales, mais par station.
 
@@ -90,9 +90,9 @@ Le niveau d'alerte globale s'appuie sur la liste des niveaux d'alerte des statio
 
 ### Alerte par bassin
 Accès API : uniquement en tuiles vecteur 
- - sous-bassins : https://sagui.hydro-matters.fr/tiles/guyane.rainfall_subbasin_aggregated_geo.html
- - mini-bassins : https://sagui.hydro-matters.fr/tiles/guyane.rainfall_minibasin_aggregated_geo.html
- - aggrégées selon niveau de zoom : https://sagui.hydro-matters.fr/tiles/guyane.mvt_rainfall.html
+ - sous-bassins : [https://sagui.hydro-matters.fr/tiles/guyane.rainfall_subbasin_aggregated_geo.html](https://sagui.hydro-matters.fr/tiles/guyane.rainfall_subbasin_aggregated_geo.html)
+ - mini-bassins : [https://sagui.hydro-matters.fr/tiles/guyane.rainfall_minibasin_aggregated_geo.html](https://sagui.hydro-matters.fr/tiles/guyane.rainfall_minibasin_aggregated_geo.html)
+ - aggrégées selon niveau de zoom : [https://sagui.hydro-matters.fr/tiles/guyane.mvt_rainfall.html](https://sagui.hydro-matters.fr/tiles/guyane.mvt_rainfall.html)
 
 Selon le niveau de zoom sur la carte, on verra soit les sous-bassins soit les mini-bassins. Les aplats de couleur dépendent du niveau d'alerte pour chacun des polygones affichés (codes d'alerte ci-dessous), à la dernière date disponible.
 
@@ -111,13 +111,13 @@ Elle est déterminée à partir de la moyenne des valeurs de pluies sur les mini
 
 ## Pollution atmosphérique
 
-Accès API : https://sagui.hydro-matters.fr/api/v1/atmo/files
+Accès API : [https://sagui.hydro-matters.fr/api/v1/atmo/files](https://sagui.hydro-matters.fr/api/v1/atmo/files)
 
 ### Données quotidiennes
-Pour chaque jour, un fichier geotiff est produit par un processus externe (https://github.com/HydroMetGuyane-Hydro-Matters/atmo_s5p)
+Pour chaque jour, un fichier geotiff est produit par un [processus externe](https://github.com/HydroMetGuyane-Hydro-Matters/atmo_s5p)
 
 Ce fichier, ou plutôt sa version PNG, est affiché directement sans autre transformation.
-Il s'agit d'une donnée catégorisée selon des plages de valeurs, listées sur http://sagui.hydro-matters.fr/api/v1/atmo/classes.
+Il s'agit d'une donnée catégorisée selon des plages de valeurs, listées sur [http://sagui.hydro-matters.fr/api/v1/atmo/classes](http://sagui.hydro-matters.fr/api/v1/atmo/classes).
 Il est possible d'éditer ces catégories via l'interface d'admin, table `Categories used for atmospheric data alerts`. Evidemment, les changements ne seront pris en compte que pour les fichiers traités ultérieurement.
 
 ![Seuils d'alerte](imgs/atmo_seuils.png)

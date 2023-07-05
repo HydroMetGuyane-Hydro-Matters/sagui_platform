@@ -39,8 +39,10 @@ printf "Atmo pollution data: Retrieve and process\n${NORMAL}"
 # Send alerts
 printf "${ORANGE}\n\n-------------------------------------------------\n"
 printf "Sending alerts (emails)\n${NORMAL}"
-/usr/local/bin/docker-compose -f docker-compose.yml  -f docker-compose.prod.yml exec -T backend bash -c "./manage.py rainfall_import"
+/usr/local/bin/docker-compose -f docker-compose.yml  -f docker-compose.prod.yml exec -T backend bash -c "./manage.py send_alerts"
 
 printf "${ORANGE}\n\n-------------------------------------------------\n"
 printf "last updated: \n${NORMAL}"
 printf $(date +'%d-%m-%Y_%H:%M')
+
+

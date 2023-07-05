@@ -13,12 +13,12 @@ Ci-dessous plus de détails sur chacun des modes d'alerte
 
 ## Prévisions
 
-### Alerte globale
-Accès API : [https://sagui.hydro-matters.fr/api/v1/dashboard](https://sagui.hydro-matters.fr/api/v1/dashboard)
 
-Elles sont définies dans [https://github.com/HydroMetGuyane-Hydro-Matters/sagui_backend/blob/main/src/sagui/utils/stations_forecast.py#L12-L90](https://github.com/HydroMetGuyane-Hydro-Matters/sagui_backend/blob/main/src/sagui/utils/stations_forecast.py#L12-L90)
+### Alerte par station
 
-Le niveau d'alerte s'appuie sur le calcul d'anomalie. Plus précisément, il prend l'anomalie moyenne sur l'ensemble des stations. Et détermine le niveau d'alerte à partir de ça. La correspondance se fait via la fonction SQL `guyane.anomaly_to_alert_level` définie comme suit : 
+Accès API : [https://sagui.hydro-matters.fr/api/v1/flow_previ/stations](https://sagui.hydro-matters.fr/api/v1/flow_previ/stations)
+
+Le niveau d'alerte s'appuie sur le calcul d'anomalie. La correspondance se fait via la fonction SQL `guyane.anomaly_to_alert_level` définie comme suit : 
 ```
 CREATE OR REPLACE FUNCTION guyane.anomaly_to_alert_level(flow_anomaly double precision)
   RETURNS text
@@ -43,6 +43,13 @@ COMMENT ON FUNCTION guyane.anomaly_to_alert_level(double precision) IS
 
 L'anomalie est calculée sur l'écart entre la valeur de la période de référence la plus récente et la valeur actuelle. 
 
+### Alerte globale
+Accès API : [https://sagui.hydro-matters.fr/api/v1/dashboard](https://sagui.hydro-matters.fr/api/v1/dashboard)
+
+Elles sont définies dans [https://github.com/HydroMetGuyane-Hydro-Matters/sagui_backend/blob/main/src/sagui/utils/stations_forecast.py#L12-L90](https://github.com/HydroMetGuyane-Hydro-Matters/sagui_backend/blob/main/src/sagui/utils/stations_forecast.py#L12-L90)
+
+Le niveau d'alerte est calculé de la même façon que pour chaque station, en s'appuiyant sur ***la valeur d'anomalie la plus élevée en valeur absolue***.
+
 Des statistiques (`histogram`) sont aussi fournies par le même point d'API. Il s'appuie sur les valeurs de prévision à J+5
 
 
@@ -53,14 +60,6 @@ Elles ne sont disponibles que sur les stations.
 
 Elles sont utilisées pour les calculs d'alerte. Et affichées dans la visualisation graphique 
 
-Les valeurs d'anomalies 
-
-
-### Alerte par station
-
-Accès API : [https://sagui.hydro-matters.fr/api/v1/flow_previ/stations](https://sagui.hydro-matters.fr/api/v1/flow_previ/stations)
-
-La fonction utilisée pour le calcul d'anomalie et les alertes est la même que pour les alertes globales, mais par station.
 
 
 ## Débits
@@ -84,7 +83,7 @@ Selon les stations, le nombre de niveaux d'alerte disponibles n'est pas le même
 
 ### Alerte globale
 Le niveau d'alerte globale s'appuie sur la liste des niveaux d'alerte des stations. Et prend la première valeur rencontrée dans l'ordre suivant : 
-`['f3', 'f2', 'f1', 'd2', 'n']`
+`['f3', 'f2', 'd2', 'f1', 'n']`
 
 ## Pluie
 
@@ -107,7 +106,9 @@ Selon le niveau de zoom sur la carte, on verra soit les sous-bassins soit les mi
 
 
 ### Alerte globale
-Elle est déterminée à partir de la moyenne des valeurs de pluies sur les minibassins et utilise les mêmes seuils que ci-dessus.
+Elle est déterminée à partir de la valeur de pluie la plus élevée au niveau des **sous-bassins** et utilise les mêmes seuils que ci-dessus.
+
+Un champ `histogram` est fourni en bonus et représente la répartition des **minibassins** selon leur niveau d'alerte.
 
 ## Pollution atmosphérique
 

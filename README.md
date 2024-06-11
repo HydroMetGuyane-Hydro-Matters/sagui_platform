@@ -10,6 +10,10 @@ docker-compose build
 ```
 
 ## Run the apps
+### env files
+- Rename `.envs-hyfaa.sample` to `.envs-hyfaa`
+- Set a proper value to the API key (hydroweb.next)
+
 ### Dev mode (localhost)
 To start them in development mode, you can simply run
 ```bash

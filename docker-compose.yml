@@ -44,7 +44,7 @@ services:
       - internal
 
   backend:
-    image: pigeosolutions/sagui_backend:latest
+    image: pigeosolutions/sagui-backend:latest
     restart: always
     build: ./sagui_backend
     depends_on:
